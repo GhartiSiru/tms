@@ -13,15 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('teachers', function (Blueprint $table) {
+        Schema::create('subjects', function (Blueprint $table) {
             $table->id();
-            $table->string('lecturer_name');
-            $table->integer('gender');
-            $table->string('phone_num');
-            $table->string('email');
-            $table->string('address');
-            $table->string('nationality');
-            $table->date('dob');
+            $table->foreignId('faculty_id')->constrained('faculties')->onDelete('cascade');
+            $table->string('subject');
+            $table->longText('description')->nullable();
+            $table->boolean('status')->default(1);
             $table->timestamps();
         });
     }
@@ -33,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('teachers');
+        Schema::dropIfExists('subjects');
     }
 };

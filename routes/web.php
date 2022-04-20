@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\FacultyController;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\TeacherController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -16,9 +18,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
 Route::redirect('/', 'login');
 
 Auth::routes();
@@ -27,3 +26,5 @@ Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])-
 
 Route::resource('menus', MenuController::class);
 Route::resource('teacher', TeacherController::class);
+Route::resource('faculty', FacultyController::class);
+Route::resource('subject', SubjectController::class);

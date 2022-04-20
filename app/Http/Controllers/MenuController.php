@@ -22,7 +22,6 @@ class MenuController extends Controller
     public function index()
     {
         $menus = $this->menu->all();
-        // dd($menus);
         return view('admin.menus.index', ['menus' => $menus]);
     }
 
@@ -107,8 +106,11 @@ class MenuController extends Controller
      * @param  \App\Models\Menu  $menu
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Menu $menu)
+    public function destroy($id)
     {
-        //
+        $menu = $this->menu->findById($id);
+        $menu->delete();
+        session()->flash('message', 'Menu Records deleted successfully');
+        return back();
     }
 }

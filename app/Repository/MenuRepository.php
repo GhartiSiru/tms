@@ -27,8 +27,8 @@ class MenuRepository{
 
      public function findById($id){
 
-        $news = $this->news->find($id);
-        return $news;
+        $menus = $this->menu->find($id);
+        return $menus;
      }
 
 }

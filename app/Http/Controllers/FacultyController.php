@@ -2,27 +2,28 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Teacher;
+use App\Models\Faculty;
+use App\Repository\FacultyRepository;
 use App\Repository\TeacherRepository;
 use Illuminate\Http\Request;
 
-class TeacherController extends Controller
+class FacultyController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-
-    public function __construct(TeacherRepository $teacher)
+    public function __construct(TeacherRepository $teacher, FacultyRepository $faculty)
     {
        $this->teacher = $teacher;
+       $this->faculty = $faculty;
     }
 
     public function index()
     {
-        $teachers = $this->teacher->all();
-        return view('admin.teacher.index', ['teachers'=>$teachers]);
+        $faculties = $this->faculty->all();
+        return view('admin.faculty.index', ['faculties'=>$faculties]);
     }
 
     /**
@@ -32,7 +33,8 @@ class TeacherController extends Controller
      */
     public function create()
     {
-        return view('admin.teacher.create');
+        $teachers = $this->teacher->all();
+        return view('admin.faculty.create',['teachers' => $teachers]);
     }
 
     /**
@@ -44,38 +46,32 @@ class TeacherController extends Controller
     public function store(Request $request)
     {
         $rules = [
-            'lecturer_name' => 'required|string|max:255',
-            'gender' => 'required|integer|max:255',
-            'phone_num' => 'required|string|max:255',
-            'email' => 'required|email|max:255',
-            'address' => 'required|string|max:255',
-            'nationality' => 'required|string|max:255',
-            'dob' => 'required|date'
+            'teacher_id' => 'required|string|max:255',
+            'faculty_name' => 'required|string|max:255',
+            'description' => 'nullable|string|max:1000',
+            'status' => 'required',
         ];
 
         $validate = $request->validate($rules);
-        $create = Teacher::create($validate);
-        // dd($create);
+        $create = Faculty::create($validate);
         if($create)
         {
-            session()->flash('success', 'Teacher Data Created Successfully');
-            return redirect()->route('teacher.index');
-
+            session()->flash('success', 'Faculty Data Created Successfully');
+            return redirect()->route('faculty.index');
         }
         else{
-            session()->flash('danger', 'Teacher could not created');
+            session()->flash('danger', 'Faculty could not created');
             return back();
         }
-
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Teacher  $teacher
+     * @param  \App\Models\Faculty  $faculty
      * @return \Illuminate\Http\Response
      */
-    public function show(Teacher $teacher)
+    public function show(Faculty $faculty)
     {
         //
     }
@@ -83,10 +79,10 @@ class TeacherController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Teacher  $teacher
+     * @param  \App\Models\Faculty  $faculty
      * @return \Illuminate\Http\Response
      */
-    public function edit(Teacher $teacher)
+    public function edit(Faculty $faculty)
     {
         //
     }
@@ -95,10 +91,10 @@ class TeacherController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Teacher  $teacher
+     * @param  \App\Models\Faculty  $faculty
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Teacher $teacher)
+    public function update(Request $request, Faculty $faculty)
     {
         //
     }
@@ -106,14 +102,14 @@ class TeacherController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Teacher  $teacher
+     * @param  \App\Models\Faculty  $faculty
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $teacher = $this->teacher->findById($id);
-        $teacher->delete();
-        session()->flash('message', 'Teacher deleted successfully');
+        $faculty = $this->faculty->findById($id);
+        $faculty->delete();
+        session()->flash('message', 'Faculty deleted successfully');
         return back();
     }
 }

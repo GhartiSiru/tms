@@ -1,6 +1,6 @@
 @extends('layouts.main')
 @section('title')
-    Menu
+    Teacher
 @endsection
 @section('content')
     <!-- Content Wrapper. Contains page content -->
@@ -9,42 +9,46 @@
             <div class="container-fluid">
                 <div class="row">
                     @include('admin.components.alert')
-                    <div class="col-lg-9">
+                    <div class="col-lg-12">
                         <div class="card card-primary card-outline">
                             <div class="card-body">
+                            <a href="{{ route('teacher.create') }}" class="btn btn-success btn-sm mb-4 px-3">Add Teacher</a>
                                 <table class="table responsive table-hover table-bordered text-center" id="datatable">
                                     <thead>
                                         <tr>
                                             <th>S.N</th>
-                                            <th>Menu</th>
-                                            <th>Controller</th>
-                                            <th>Link</th>
-                                            <th>Icon</th>
-                                            <th>Order</th>
-                                            <th>Status</th>
+                                            <th>Lecturer Name</th>
+                                            <th>Phone Number</th>
+                                            <th>Gender</th>
+                                            <th>Email</th>
+                                            <th>Address</th>
+                                            <th>Date of Birth</th>
+                                            <th>Nationality</th>
                                             <th style="width:100px">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @forelse ($menus as $menu)
+                                        @forelse ($teachers as $teacher)
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
-                                                <td>{{ $menu->menu_name }}</td>
-                                                <td style="width:100px;">{{ $menu->menu_controller }}</td>
-                                                <td>{{ $menu->menu_link }}</td>
-                                                <td>{!! $menu->menu_icon !!}</td>
-                                                <td>{{ $menu->order }}</td>
-                                                <td>
+                                                <td>{{ $teacher->lecturer_name }}</td>
+                                                <td>{{ $teacher->phone_num }}</td>
+                                                <td>{{ config('teacher.gender.'.$teacher->gender) }}</td>
+                                                <td>{{ $teacher->email }}</td>
+                                                <td>{{  $teacher->address  }}</td>
+                                                <td>{{ $teacher->dob }}</td>
+                                                <td>{{ $teacher->nationality }}</td>
+                                                {{-- <td>
                                                     @if ($menu->menu_status == 1)
                                                         <span class="badge badge-success badge-btn">Active</span>
                                                     @elseif($menu->menu_status == 0)
                                                         <span class="badge badge-danger badge-btn">Inactive</span>
                                                     @endif
-                                                </td>
+                                                </td> --}}
                                                 <td style="width:150px">
-                                                    <a href="{{ route('menus.edit', $menu->id) }}"
+                                                    <a href="{{ route('teacher.edit', $teacher->id) }}"
                                                         class="text-white text-decoration-none btn btn-info btn-sm">Edit</a>
-                                                    {!! Form::open(['method' => 'DELETE', 'url' => ['menus', $menu->id], 'class' => 'd-inline']) !!}
+                                                    {!! Form::open(['method' => 'DELETE', 'url' => ['teacher', $teacher->id], 'class' => 'd-inline']) !!}
                                                     <button type="submit" class="btn btn-danger btn-sm"
                                                         onclick="javascript:return confirm('Are you sure you want to delete?');">Delete</button>
 
@@ -62,18 +66,7 @@
                             </div>
                         </div>
                     </div>
-                    <!-- /.col-md-3 -->
-                    <div class="col-lg-3">
-                        <div class="card card-info card-outline">
-                            <div class="card-header with-border">
-                                <h3 class="card-title">Add Menu</h3>
-                            </div>
-                            <div class="card-body">
-                                @include('admin.menus.create')
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /.col-md-3 -->
+
                 </div>
                 <!-- /.row -->
             </div><!-- /.container-fluid -->
