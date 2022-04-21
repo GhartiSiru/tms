@@ -38,16 +38,8 @@
                                                 <td>{{  $teacher->address  }}</td>
                                                 <td>{{ $teacher->dob }}</td>
                                                 <td>{{ $teacher->nationality }}</td>
-                                                {{-- <td>
-                                                    @if ($menu->menu_status == 1)
-                                                        <span class="badge badge-success badge-btn">Active</span>
-                                                    @elseif($menu->menu_status == 0)
-                                                        <span class="badge badge-danger badge-btn">Inactive</span>
-                                                    @endif
-                                                </td> --}}
                                                 <td style="width:150px">
-                                                    <a href="{{ route('teacher.edit', $teacher->id) }}"
-                                                        class="text-white text-decoration-none btn btn-info btn-sm">Edit</a>
+
                                                     {!! Form::open(['method' => 'DELETE', 'url' => ['teacher', $teacher->id], 'class' => 'd-inline']) !!}
                                                     <button type="submit" class="btn btn-danger btn-sm"
                                                         onclick="javascript:return confirm('Are you sure you want to delete?');">Delete</button>

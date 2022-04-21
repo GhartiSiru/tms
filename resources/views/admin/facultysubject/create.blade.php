@@ -1,7 +1,9 @@
+@inject('faculty_helper','App\Helpers\FacultyHelper')
+@inject('subject_helper','App\Helpers\SubjectHelper')
 @extends('layouts.main')
 @section('content')
 @section('title')
-Faculty
+Faculty Subject
 @endsection
     <div class="content">
         <div class="container-fluid">
@@ -9,33 +11,24 @@ Faculty
                 <div class="col-lg-12">
                     <div class="card card-primary card-outline">
                         <div class="card-body">
-                            {!! Form::open(['method' => 'post', 'route' => 'faculty.store']) !!}
+                            {!! Form::open(['method' => 'post', 'route' => 'facultysubject.store']) !!}
                             <div class="form-row">
                                 <div class="col-md-6 form-group">
-                                    {{ Form::label('teacher_id', 'Teacher Name') }} <label for=""
-                                        class="text-danger">*</label>
-                                    {{ Form::select('teacher_id', $teachers->pluck('lecturer_name', 'id'), Request::has('teacher_id'), ['class' => 'form-control form-control-sm' . ($errors->has('lecturer_name') ? 'is-invalid' : '')]) }}
-                                    @error('teacher_id')
+                                    {{ Form::label('faculty_id', 'Faculty Name') }}
+                                    {{ Form::select('faculty_id', $faculty_helper->facultyDropdown(), null, ['class' => 'form-control form-control-sm', 'id' => 'faculty' . ($errors->has('faculty_id') ? 'is-invalid' : '')]) }}
+                                    @error('faculty_id')
                                         <div>
                                             <span class="text-danger">{{ $message }}</span>
                                         </div>
                                     @enderror
                                 </div>
                                 <div class="col-md-6 form-group">
-                                    {{ Form::label('faculty_name', 'Faculty Name') }}
-                                    <label for="" class="text-danger">*</label>
-                                    {{ Form::text('faculty_name', null, ['class' => 'form-control form-control-sm', 'placeholder' => 'Faculty Name' . ($errors->has('faculty_name') ? 'is-invalid' : '')]) }}
-                                    @error('faculty_name')
-                                        <div><span class="text-danger">{{ $message }}</span></div>
-                                    @enderror
-                                </div>
-
-                                <div class="col-md-12 form-group">
-                                    {{ Form::label('description', 'Description') }}
-                                    <label for="" class="text-danger">*</label>
-                                    {{ Form::textarea('description', null, ['class' => 'form-control form-control-sm', 'placeholder' => 'Description' . ($errors->has('description') ? 'is-invalid' : '')]) }}
-                                    @error('description')
-                                        <div><span class="text-danger">{{ $message }}</span></div>
+                                    {{ Form::label('subject_id', 'Subject Name') }}
+                                    {{ Form::select('subject_id', $subject_helper->subjectDropdown(), null, ['class' => 'form-control form-control-sm', 'id'=>'subject' . ($errors->has('subject_id') ? 'is-invalid' : '')]) }}
+                                    @error('subject_id')
+                                        <div>
+                                            <span class="text-danger">{{ $message }}</span>
+                                        </div>
                                     @enderror
                                 </div>
                                 <div class="col-md-12 form-group">
@@ -59,3 +52,5 @@ Faculty
         </div>
     </div>
 @endsection
+
+

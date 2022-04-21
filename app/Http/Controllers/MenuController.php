@@ -54,7 +54,6 @@ class MenuController extends Controller
 
         $validate = $request->validate($rules);
         $create = Menu::create($validate);
-        // dd($create);
         if($create)
         {
             session()->flash('success', 'Menu created Successfully');

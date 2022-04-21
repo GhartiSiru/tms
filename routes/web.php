@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\FacultyController;
+use App\Http\Controllers\FacultySubjectController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\TeacherController;
@@ -28,3 +29,4 @@ Route::resource('menus', MenuController::class);
 Route::resource('teacher', TeacherController::class);
 Route::resource('faculty', FacultyController::class);
 Route::resource('subject', SubjectController::class);
+Route::resource('facultysubject', FacultySubjectController::class);

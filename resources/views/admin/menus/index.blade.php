@@ -42,8 +42,7 @@
                                                     @endif
                                                 </td>
                                                 <td style="width:150px">
-                                                    <a href="{{ route('menus.edit', $menu->id) }}"
-                                                        class="text-white text-decoration-none btn btn-info btn-sm">Edit</a>
+                                                  
                                                     {!! Form::open(['method' => 'DELETE', 'url' => ['menus', $menu->id], 'class' => 'd-inline']) !!}
                                                     <button type="submit" class="btn btn-danger btn-sm"
                                                         onclick="javascript:return confirm('Are you sure you want to delete?');">Delete</button>

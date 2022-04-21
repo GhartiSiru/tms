@@ -17,6 +17,6 @@ class Faculty extends Model
 
     public function teacher()
     {
-        return $this->hasOne(Teacher::class, 'id');
+        return $this->hasMany(Teacher::class, 'id');
     }
 }

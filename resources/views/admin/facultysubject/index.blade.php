@@ -1,6 +1,6 @@
 @extends('layouts.main')
 @section('title')
-    Faculty
+    Faculty Subject
 @endsection
 @section('content')
     <!-- Content Wrapper. Contains page content -->
@@ -12,37 +12,34 @@
                     <div class="col-lg-12">
                         <div class="card card-primary card-outline">
                             <div class="card-body">
-                            <a href="{{ route('subject.create') }}" class="btn btn-success btn-sm mb-4 px-3">Add Subject</a>
-                                <table class="table responsive table-hover table-bordered text-center">
+                            <a href="{{ route('facultysubject.create') }}" class="btn btn-success btn-sm mb-4 px-3">Add Faculty Subject</a>
+                                <table class="table responsive table-hover table-bordered text-center" id="datatable">
                                     <thead>
                                         <tr>
                                             <th>S.N</th>
-                                            <th>Lecturer Name</th>
                                             <th>Faculty Name</th>
-                                            <th>Subject</th>
+                                            <th>Subject Name</th>
                                             <th>Status</th>
                                             <th style="width:100px">Action</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        @forelse ($subjects as $subject)
+                                    {{-- <tbody>
+                                        @forelse ($faculties as $faculty)
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
-                                                @foreach ($subject->faculty->teacher as $teacher)
-                                                    <td>{{$teacher->lecturer_name }}</td>
-                                                @endforeach
-                                                <td>{{ $subject->faculty->faculty_name }}</td>
-                                                <td>{{ $subject->subject }}</td>
+                                                <td>{{ $faculty->teacher->lecturer_name }}</td>
+                                                <td>{{ $faculty->faculty_name }}</td>
                                                  <td>
-                                                    @if ($subject->status == 1)
+                                                    @if ($faculty->status == 1)
                                                         <span class="badge badge-success badge-btn">Active</span>
-                                                    @elseif($subject->status == 0)
+                                                    @elseif($faculty->status == 0)
                                                         <span class="badge badge-danger badge-btn">Inactive</span>
                                                     @endif
                                                 </td>
                                                 <td style="width:150px">
-
-                                                    {!! Form::open(['method' => 'DELETE', 'url' => ['subject', $subject->id], 'class' => 'd-inline']) !!}
+                                                    <a href="{{ route('faculty.edit', $faculty->id) }}"
+                                                        class="text-white text-decoration-none btn btn-info btn-sm">Edit</a>
+                                                    {!! Form::open(['method' => 'DELETE', 'url' => ['faculty', $faculty->id], 'class' => 'd-inline']) !!}
                                                     <button type="submit" class="btn btn-danger btn-sm"
                                                         onclick="javascript:return confirm('Are you sure you want to delete?');">Delete</button>
 
@@ -55,7 +52,7 @@
                                                 <th>No data found!!</th>
                                             </table>
                                         @endforelse
-                                    </tbody>
+                                    </tbody> --}}
                                 </table>
                             </div>
                         </div>

@@ -27,7 +27,9 @@
                                         @forelse ($faculties as $faculty)
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
-                                                <td>{{ $faculty->teacher->lecturer_name }}</td>
+                                                @foreach ($faculty->teacher as $teacher)
+                                                    <td>{{$teacher->lecturer_name }}</td>
+                                                @endforeach
                                                 <td>{{ $faculty->faculty_name }}</td>
                                                  <td>
                                                     @if ($faculty->status == 1)
@@ -37,8 +39,8 @@
                                                     @endif
                                                 </td>
                                                 <td style="width:150px">
-                                                    <a href="{{ route('faculty.edit', $faculty->id) }}"
-                                                        class="text-white text-decoration-none btn btn-info btn-sm">Edit</a>
+                                                    {{-- <a href="{{ route('faculty.edit', $faculty->id) }}"
+                                                        class="text-white text-decoration-none btn btn-info btn-sm">Edit</a> --}}
                                                     {!! Form::open(['method' => 'DELETE', 'url' => ['faculty', $faculty->id], 'class' => 'd-inline']) !!}
                                                     <button type="submit" class="btn btn-danger btn-sm"
                                                         onclick="javascript:return confirm('Are you sure you want to delete?');">Delete</button>
